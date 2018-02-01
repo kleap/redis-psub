@@ -24,7 +24,18 @@ class RedisStore {
     });
   }
 
-  save(channelId, event) {
+  async addSubscription(subscription) {
+    const client = redis.createClient(this.config);
+    await client.saddAsync(data);
+  }
+
+  async checkSubscription(subscription) {
+    const client = redis.createClient(this.config);
+    const subscribed = await client.smembersAsync(subscription);
+    return subscribed;
+  }
+
+  saveLog(channelId, event) {
     return new Promise((resolve, reject) => {
       this.client.multi()
         .lpush(channelId, JSON.stringify(event))
@@ -46,13 +57,13 @@ class RedisStore {
     client.on('message', listener);
   }
 
-  async get(channelId, eventId) {
+  async getLog(channelId, eventId) {
     const client = redis.createClient(this.config);
     const data = await client.lindexAsync(channelId, -eventId);
     return JSON.parse(data);
   }
 
-  async getAll(eventId) {
+  async getAllLogs(eventId) {
     const items = await this.client.lrangeAsync(eventId, 0, -1);
     return items.map(item => JSON.parse(item));
   }
