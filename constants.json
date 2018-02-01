@@ -1,0 +1,5 @@
+{
+  "Errors": {
+    "DATABASE_ERROR": "Error occur during redis connection"
+  }
+}

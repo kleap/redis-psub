@@ -1,0 +1,23 @@
+{
+  "name": "redis-psub",
+  "version": "0.0.0",
+  "description": "Redis psub wrapper for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kleap/redis-psub.git"
+  },
+  "author": "Artemy Sinitsa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kleap/redis-psub/issues"
+  },
+  "homepage": "https://github.com/kleap/redis-psub#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "redis": "^2.8.0"
+  }
+}
