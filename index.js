@@ -24,16 +24,24 @@ class RedisStore {
     });
   }
 
-  async addSubscription(subscription) {
+  async addItem(set, item) {
     const client = redis.createClient(this.config);
-    await client.saddAsync(data);
+    const added = await client.saddAsync(set, item);
+    return added;
   }
 
-  async checkSubscription(subscription) {
+  async checkItem(set, item) {
     const client = redis.createClient(this.config);
-    const subscribed = await client.smembersAsync(subscription);
+    const subscribed = await client.smembersAsync(set, item);
     return subscribed;
   }
+
+  async removeItem(set, item) {
+    const client = redis.createClient(this.config);
+    const removed = await client.sremAsync(set, item);
+    return removed;
+  }
+
 
   saveLog(channelId, event) {
     return new Promise((resolve, reject) => {
