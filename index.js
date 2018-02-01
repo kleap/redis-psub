@@ -42,6 +42,11 @@ class RedisStore {
     return removed;
   }
 
+  async exists(storage) {
+    const client = redis.createClient(this.config);
+    const exists = await client.existsAsync(storage);
+    return exists;
+  }
 
   saveLog(channelId, event) {
     return new Promise((resolve, reject) => {
